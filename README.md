@@ -3,7 +3,7 @@ Uniform
 
 Sexy form elements with jQuery. Now with HTML5 attributes
 
-Version 1.8 (not yet released)
+Version 2.0
 
 Works well with jQuery 1.6+.  We've received patches to make it work with older versions of jQuery, back through version 1.3.
 
@@ -108,6 +108,14 @@ Sets the class given to elements when they are disabled.
 
     $("select").uniform({disabledClass: 'myDisabledClass'});
 
+### eventNamespace (string)
+
+*Default:* ".uniform"
+
+Binds events using this namespace with jQuery.  Useful if you want to unbind them later.  Shouldn't probably need to be changed unless it conflicts with other code.
+
+    $("select").uniform({eventNamespace: '.uniformEvents'});
+
 ### fileBtnClass (string)
 
 *Default:* "action"
@@ -206,9 +214,17 @@ If this option is set to true, Uniform will try to fit the select width to the a
 
 *Default:* "selector"
 
-Sets the class given to the wrapper div for select elements.
+Sets the class given to the wrapper div for select elements, but not multiselects.
 
     $("select").uniform({selectClass: 'mySelectClass'});
+
+### selectMultiClass (string)
+
+*Default:* "uniform-multiselect"
+
+Sets the class given to the wrapper div for select elements that are multiselects.
+
+    $("select").uniform({selectMultiClass: 'myMultiSelectClass'});
 
 ### submitDefaultText (string)
 
@@ -279,7 +295,7 @@ Uniform is supposed to be pretty simple, but there are a few things that can be 
 
 * If you have ideas, or bugs, please post them in [GitHub](https://github.com/pixelmatrix/uniform). We rely on our users' for improvement ideas and bug reports. Without your participation, Uniform will stay static.
 
-Upgrading To 1.8
+Upgrading To 2.0
 ----------------
 
 Your sprite map will now support many new things and will need to be updated.  If you use custom backgrounds that are not in the sprite map, those will need updating as well.
@@ -289,3 +305,36 @@ The uniform.options object was renamed to uniform.defaults since they are the de
 Previously, calls to update() would render all elements with the most recent set of options.  This has been fixed, but may change how your page looks.  Test to make sure things still render as expected.
 
 Various option names have changed to be less ambiguous or have a consistent naming scheme.
+
+$.uniform.noSelect is no longer exposed and has been updated to version 1.0.3.
+
+$.uniform.restore() does not need to be global; you now can use $('#myId').uniform.restore() instead to just restore some elements.  Same thing for updates.
+
+The sprite changed a bit.  The caps for select lists were moved to the left-hand side.  Button theming was added and the file upload images were reordered to match the select list order.  Specifically, the order at the bottom should be
+
+* file input normal
+* file input hover (was disabled)
+* file input disabled (was hover)
+
+* file button normal (was disabled)
+* file button active (was normal)
+* file button hover
+* file button hoveractive (was active)
+* file button disabled (was hoveractive)
+
+* button normal (was button cap normal or omitted)
+* button active (was button cap hover or omitted)
+* button hover (was button cap active or omitted)
+* button disabled (was button cap disabled or omitted)
+
+* button cap normal (was button normal or omitted)
+* button cap active (was button hover or omitted)
+* button cap hover (was button active or omitted)
+* button cap disabled (was button disabled or omitted)
+
+Reporting Bugs
+--------------
+
+It sure would be handy if you could create a test page to help illustrate bugs.  When you use the <a href="https://github.com/pixelmatrix/uniform/issues">GitHub Issue Tracker</a>, you could clone this <a href="https://gist.github.com/4328659">bug template gist</a> to help illustrate your point.
+
+Even if you don't do that, all sorts of feedback is welcome, but narrowing down your problem or providing an example would immediately help narrow down the problem quickly.
